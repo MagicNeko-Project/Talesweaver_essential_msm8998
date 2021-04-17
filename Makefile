@@ -653,6 +653,14 @@ endif
 endif
 ifeq ($(cc-name),clang)
 KBULID_CFLAGS   += -mcpu=cortex-a53 -mtune=cortex-a53
+KBUILD_CFLAGS   += $(call cc-option, -mllvm -polly) \
+		   $(call cc-option, -mllvm -polly-run-dce) \
+		   $(call cc-option, -mllvm -polly-run-inliner) \
+		   $(call cc-option, -mllvm -polly-opt-fusion=max) \
+		   $(call cc-option, -mllvm -polly-ast-use-context) \
+		   $(call cc-option, -mllvm -polly-detect-keep-going) \
+		   $(call cc-option, -mllvm -polly-vectorizer=stripmine) \
+		   $(call cc-option, -mllvm -polly-invariant-load-hoisting)
 endif
 
 # Tell gcc to never replace conditional load with a non-conditional one
