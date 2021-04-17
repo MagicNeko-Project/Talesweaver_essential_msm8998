@@ -651,6 +651,9 @@ else
 KBUILD_CFLAGS   += -O2
 endif
 endif
+ifeq ($(cc-name),clang)
+KBULID_CFLAGS   += -mcpu=cortex-a53 -mtune=cortex-a53
+endif
 
 # Tell gcc to never replace conditional load with a non-conditional one
 KBUILD_CFLAGS	+= $(call cc-option,--param=allow-store-data-races=0)
